@@ -362,9 +362,7 @@ cut_plays <- function(df,
 #'
 #' @description Prepare a week of data from the 2021 Big Data Bowl (data from 2018 season). To use this, you'll need to have
 #' the BDB data saved and unzipped somewhere in a directory on your computer.
-#' @param week Get and prepare this week of data (1-17)
-#' @param dir Location of directory where BDB data lives. Default is unzipped to adjacent directory
-#' (default = "../nfl-big-data-bowl-2021/input")
+#' @param pbp The play-by-play data
 #' @param trim_frame If a throw, sack, etc happens before this frame, drop the play (default = 25; i.e. before
 #' 1.5 seconds into the play).
 #' @param frames_after_throw If a frame happened more than this many frames after throw, drop the frame.
@@ -374,14 +372,13 @@ cut_plays <- function(df,
 #' drops plays without at least 3 offensive and defensive players.
 #' @export
 prepare_bdb_week <- function(
-  week,
-  dir = "../nfl-big-data-bowl-2021/input",
+  pbp,
   trim_frame = 25,
   frames_after_throw = 10,
   keep_frames = NULL,
   drop_positions = c("QB")
   ) {
-  df <- readr::read_csv(glue::glue("{dir}/week{week}.csv")) %>%
+  df <- pbp %>%
 
     # do all the cleaning
     clean_and_rotate() %>%
