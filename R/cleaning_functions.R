@@ -371,7 +371,7 @@ cut_plays <- function(df,
 #' @details Loads raw .csvs from 2021 BDB, cleans, rotates, applies frame trimming, calculates orientation to QB,
 #' drops plays without at least 3 offensive and defensive players.
 #' @export
-prepare_bdb_week <- function(
+prepare_pbp <- function(
   pbp,
   trim_frame = 25,
   frames_after_throw = 10,
